@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svg-icon name="article" />
+    <svg-icon class="svg-outer" name="article" />
   </div>
 </template>
 
@@ -9,6 +9,8 @@ import SvgIcon from '@/components/svg-icon/index.vue'
 
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.svg-outer{
+  width: 20px;
+}
 </style>

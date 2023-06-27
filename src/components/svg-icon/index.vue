@@ -14,7 +14,7 @@ const props = defineProps({
   }
 })
 
-const iconName = computed(() => `#${props.name}`)
+const iconName = computed(() => `#icon-${props.name}`)
 
 </script>
 
