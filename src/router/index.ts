@@ -18,6 +18,13 @@ const routes: RouteRecordRaw[] = [
       title: 'svg-icon'
     },
     component: () => import('@/views/svg/index.vue')
+  },
+  {
+    path: '/theme',
+    meta: {
+      title: '主题跟随系统自动切换'
+    },
+    component: () => import('@/views/theme/index.vue')
   }
 ]
 
