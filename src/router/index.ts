@@ -25,6 +25,13 @@ const routes: RouteRecordRaw[] = [
       title: '主题跟随系统自动切换'
     },
     component: () => import('@/views/theme/index.vue')
+  },
+  {
+    path: '/waterfall',
+    meta: {
+      title: '瀑布流'
+    },
+    component: () => import('@/views/waterfall/index.vue')
   }
 ]
 
