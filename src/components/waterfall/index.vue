@@ -120,7 +120,8 @@ const useLocation = () => {
     item._style.left = getLeft()
     item._style.top = getTop()
     incrementColumnHeight(index)
-    outerHeightRef.value = getMinColumnHeight()
+    outerHeightRef.value = getMaxColumnHeight()
+    console.log(outerHeightRef.value)
   })
 }
 
@@ -128,6 +129,12 @@ const useLocation = () => {
 const getMinColumnHeight = () => {
   const heights = Object.values(columnHeightsRef.value)
   return Math.min(...heights)
+}
+
+// 获取最大列所在的高度
+const getMaxColumnHeight = () => {
+  const heights = Object.values(columnHeightsRef.value)
+  return Math.max(...heights)
 }
 
 const getTop = () => getMinColumnHeight()

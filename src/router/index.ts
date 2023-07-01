@@ -32,6 +32,13 @@ const routes: RouteRecordRaw[] = [
       title: '瀑布流'
     },
     component: () => import('@/views/waterfall/index.vue')
+  },
+  {
+    path: '/infinite',
+    meta: {
+      title: '长列表'
+    },
+    component: () => import('@/views/infinite/index.vue')
   }
 ]
 
