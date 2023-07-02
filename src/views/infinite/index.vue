@@ -11,8 +11,8 @@
             <img 
               :style="{
                 width: columnWidthRef + 'px'
-              }" 
-              :src="item.src" 
+              }"
+              v-lazy-load="item.src"
             />
           </div>
         </template>

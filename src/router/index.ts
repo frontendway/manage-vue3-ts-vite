@@ -39,6 +39,13 @@ const routes: RouteRecordRaw[] = [
       title: '长列表'
     },
     component: () => import('@/views/infinite/index.vue')
+  },
+  {
+    path: '/imgCropper',
+    meta: {
+      title: '图片裁剪'
+    },
+    component: () => import('@/views/img-cropper/index.vue')
   }
 ]
 

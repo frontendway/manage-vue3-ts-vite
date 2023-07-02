@@ -159,7 +159,7 @@ const init = () => {
 }
 
 const reset = () => {
-  outerWidthRef.value = outerHeightRef.value = 0
+  outerWidthRef.value = 0
   itemHeights = []
   useColumnHeight()
 }
