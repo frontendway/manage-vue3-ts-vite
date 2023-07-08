@@ -1,6 +1,9 @@
 <template>
   <div>
-    <svg-icon class="svg-outer" name="article" />
+    <svg-icon
+      class="svg-outer"
+      name="article"
+    />
   </div>
 </template>
 

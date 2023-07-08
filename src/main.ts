@@ -6,7 +6,7 @@ import installDirectives from './directives'
 import 'virtual:svg-icons-register'
 
 createApp(App)
-.use(router)
-.use(installComponent)
-.use(installDirectives)
-.mount('#app')
+  .use(router)
+  .use(installComponent)
+  .use(installDirectives)
+  .mount('#app')

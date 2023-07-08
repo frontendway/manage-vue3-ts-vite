@@ -1,19 +1,22 @@
 <template>
   <div class="outer">
-    <infinite v-model="loading" @onLoad="onLoad">
-      <waterfall 
-        :list="list" 
-        node-key="k" 
+    <infinite
+      v-model="loading"
+      @on-load="onLoad"
+    >
+      <waterfall
+        :list="list"
+        node-key="k"
         :column="5"
       >
-        <template #="{item, columnWidthRef}">
+        <template #default="{item, columnWidthRef}">
           <div>
-            <img 
+            <img
+              v-lazy-load="item.src"
               :style="{
                 width: columnWidthRef + 'px'
               }"
-              v-lazy-load="item.src"
-            />
+            >
           </div>
         </template>
       </waterfall>
@@ -24,7 +27,7 @@
 <script setup lang="ts">
 import infinite from '@/components/infinite/index.vue'
 import waterfall from '@/components/waterfall/index.vue'
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const loading = ref(false)
 
@@ -61,7 +64,7 @@ const _list: any[] = [
   { src: 'https://img2.baidu.com/it/u=2823876420,3970126246&fm=253&fmt=auto&app=120&f=JPEG?w=1179&h=530' }
 ]
 
-let list = ref<any[]>([])
+const list = ref<any[]>([])
 
 const fetch = () => {
   loading.value = true
@@ -71,7 +74,6 @@ const fetch = () => {
 }
 
 fetch()
-
 
 </script>
 

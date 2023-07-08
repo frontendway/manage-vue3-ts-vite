@@ -1,5 +1,5 @@
-import axios from "axios"
-import type { AxiosRequestConfig, AxiosResponse } from "axios"
+import axios from 'axios'
+import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import type { IndexSign } from '@/types/index'
 
 const server = axios.create({
@@ -11,8 +11,8 @@ server.interceptors.request.use(
   (config) => {
     return config
   },
-  err => {
-    return Promise.reject(err)
+  async err => {
+    return await Promise.reject(err)
   }
 )
 
@@ -20,26 +20,26 @@ server.interceptors.response.use(
   (resp) => {
     return resp
   },
-  (err) => {
-    return Promise.reject(err)
+  async (err) => {
+    return await Promise.reject(err)
   }
 )
 
-type Http = {
+interface Http {
   get: (url: string, data?: IndexSign, config?: AxiosRequestConfig) => Promise<AxiosResponse>
   post: (url: string, data?: IndexSign, config?: AxiosRequestConfig) => Promise<AxiosResponse>
 }
 
 const http: Http = {
-  get (url, data, config = {}) {
-    const params = data ? { data } : {}
-    return server.get(url, {
+  async get (url, data, config = {}) {
+    const params = (data != null) ? { data } : {}
+    return await server.get(url, {
       params,
       ...config
     })
   },
-  post (url, data = {}, config = {}) {
-    return server.post(url, data, config)
+  async post (url, data = {}, config = {}) {
+    return await server.post(url, data, config)
   }
 }
 

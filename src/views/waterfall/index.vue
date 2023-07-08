@@ -1,18 +1,18 @@
 <template>
   <div class="outer">
-    <waterfall 
-      :list="list" 
-      node-key="k" 
+    <waterfall
+      :list="list"
+      node-key="k"
       :column="5"
     >
-      <template #="{item, columnWidthRef}">
+      <template #default="{item, columnWidthRef}">
         <div>
-          <img 
+          <img
             :style="{
               width: columnWidthRef + 'px'
-            }" 
-            :src="item.src" 
-          />
+            }"
+            :src="item.src"
+          >
         </div>
       </template>
     </waterfall>
@@ -48,7 +48,6 @@ const list: any[] = [
   { src: 'https://b0.bdstatic.com/ugc/uEFa3faKYrSnXPx07cl63geeb7f91b43f9c81b2fe00343a282c468.jpg@h_1280' },
   { src: 'https://img2.baidu.com/it/u=2823876420,3970126246&fm=253&fmt=auto&app=120&f=JPEG?w=1179&h=530' }
 ]
-
 
 </script>
 

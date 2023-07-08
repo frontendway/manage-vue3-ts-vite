@@ -17,35 +17,35 @@ const routes: RouteRecordRaw[] = [
     meta: {
       title: 'svg-icon'
     },
-    component: () => import('@/views/svg/index.vue')
+    component: async () => await import('@/views/svg/index.vue')
   },
   {
     path: '/theme',
     meta: {
       title: '主题跟随系统自动切换'
     },
-    component: () => import('@/views/theme/index.vue')
+    component: async () => await import('@/views/theme/index.vue')
   },
   {
     path: '/waterfall',
     meta: {
       title: '瀑布流'
     },
-    component: () => import('@/views/waterfall/index.vue')
+    component: async () => await import('@/views/waterfall/index.vue')
   },
   {
     path: '/infinite',
     meta: {
       title: '长列表'
     },
-    component: () => import('@/views/infinite/index.vue')
+    component: async () => await import('@/views/infinite/index.vue')
   },
   {
     path: '/imgCropper',
     meta: {
       title: '图片裁剪'
     },
-    component: () => import('@/views/img-cropper/index.vue')
+    component: async () => await import('@/views/img-cropper/index.vue')
   }
 ]
 

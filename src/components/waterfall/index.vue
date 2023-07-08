@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     ref="outerRef"
     class="waterfall-outer"
     :style="{
@@ -7,9 +7,10 @@
     }"
   >
     <template v-if="list.length">
-      <div 
-        class="waterfall-item" 
+      <div
         v-for="(item, index) of list"
+        :key="index"
+        class="waterfall-item"
         :style="{
           width: columnWidthRef + 'px',
           height: item._style?.height + 'px',
@@ -17,7 +18,10 @@
           left: item._style?.left + 'px'
         }"
       >
-        <slot :item="item" :columnWidthRef="columnWidthRef"></slot>
+        <slot
+          :item="item"
+          :column-width-ref="columnWidthRef"
+        />
       </div>
     </template>
   </div>
@@ -25,10 +29,10 @@
 
 <script setup lang="ts">
 import type { IndexSign } from '@/types'
-import { computed, ref, watch, nextTick } from 'vue';
+import { computed, ref, watch, nextTick } from 'vue'
 import type { ColumnHeight, ImageHeight } from './types'
 
-type Props = {
+interface Props {
   list: IndexSign[]
   nodeKey: string
   column?: number
@@ -42,7 +46,7 @@ const props = withDefaults(defineProps<Props>(), {
   columnSpace: 20,
   rowSpace: 20,
   prefetch: true
-}) 
+})
 
 // 最外层容器
 const outerRef = ref()
@@ -85,32 +89,32 @@ let itemHeights: number[] = []
 
 // 利用图片 onload 获取图片高度
 const useItemHeights = () => {
-  const promiseList: Promise<ImageHeight>[] = []
+  const promiseList: Array<Promise<ImageHeight>> = []
   let pixel = 0
-  
+
   props.list.forEach(item => {
     const p = new Promise<ImageHeight>((resolve) => {
       const img = new Image()
       img.src = item.src
       img.onload = () => {
         pixel = columnWidthRef.value / img.width
-        resolve({height: img.height * pixel})
+        resolve({ height: img.height * pixel })
       }
     })
 
     promiseList.push(p)
   })
 
-  return Promise.all(promiseList)
-  .then((items) => {
-    items.forEach(item => {
-      itemHeights.push(item.height)
+  Promise.all(promiseList)
+    .then((items) => {
+      items.forEach(item => {
+        itemHeights.push(item.height)
+      })
+      useLocation()
     })
-    useLocation()
-  })
-  .catch(() => {
-    console.error('图片加载失败')
-  })
+    .catch(() => {
+      console.error('图片加载失败')
+    })
 }
 
 const useLocation = () => {

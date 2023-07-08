@@ -1,7 +1,5 @@
-export type ColumnHeight = {
-  [key: string]: number
-}
+export type ColumnHeight = Record<string, number>
 
-export type ImageHeight = {
+export interface ImageHeight {
   height: number
 }

@@ -1,5 +1,5 @@
-import { defineAsyncComponent } from "vue"
-import type { App, AsyncComponentLoader  } from 'vue'
+import { defineAsyncComponent } from 'vue'
+import type { App, AsyncComponentLoader } from 'vue'
 
 const modules = import.meta.glob('./*/index.vue')
 

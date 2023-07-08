@@ -7,7 +7,6 @@
 <script setup lang="ts">
 
 const setTheme = () => {
-  debugger
   const theme = matchMedia.matches ? 'dark' : 'light'
   console.log(theme)
 }

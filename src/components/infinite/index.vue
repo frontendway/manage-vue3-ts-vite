@@ -1,7 +1,10 @@
 <template>
   <div>
-    <slot></slot>
-    <div class="loading-outer" ref="loadingRef">
+    <slot />
+    <div
+      ref="loadingRef"
+      class="loading-outer"
+    >
       加载中...
     </div>
   </div>
@@ -10,11 +13,11 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 
-type Props = {
+interface Props {
   modelValue: boolean
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const emits = defineEmits([
   'onLoad',

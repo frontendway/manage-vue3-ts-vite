@@ -1,14 +1,21 @@
 <template>
   <div>
-    <img ref="imgRef" src="./avatar.jpg" alt="" @click="onCroper">
+    <img
+      ref="imgRef"
+      src="./avatar.jpg"
+      alt=""
+      @click="onCroper"
+    >
   </div>
-  <button @click="onGetImg">确定</button>
+  <button @click="onGetImg">
+    确定
+  </button>
 </template>
 
 <script setup lang="ts">
 import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.css'
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue'
 
 const imgRef = ref<HTMLImageElement>()
 

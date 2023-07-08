@@ -1,3 +1,1 @@
-export type IndexSign = {
-  [key: string]: any
-}
+export type IndexSign = Record<string, any>
