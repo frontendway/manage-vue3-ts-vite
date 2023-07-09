@@ -1,11 +1,13 @@
 <template>
   <div>
     <slot />
-    <div
-      ref="loadingRef"
-      class="loading-outer"
-    >
-      加载中...
+    <div ref="loadingRef">
+      <div v-show="modelValue">
+        加载更多
+      </div>
+      <div v-show="isFinished">
+        没有更多数据
+      </div>
     </div>
   </div>
 </template>
@@ -15,9 +17,10 @@ import { onMounted, ref } from 'vue'
 
 interface Props {
   modelValue: boolean
+  isFinished: boolean
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const emits = defineEmits([
   'onLoad',
@@ -27,8 +30,10 @@ const emits = defineEmits([
 const loadingRef = ref()
 
 const intersectionObserver = new IntersectionObserver((entries) => {
-  if (entries[0].intersectionRatio <= 0) return
+  const isHiden = entries[0].intersectionRatio <= 0
+  if (isHiden || props.modelValue || props.isFinished) return
 
+  emits('update:modelValue', true)
   emits('onLoad')
 })
 
@@ -38,7 +43,3 @@ onMounted(() => {
 })
 
 </script>
-
-<style scoped>
-
-</style>

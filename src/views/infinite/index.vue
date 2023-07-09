@@ -1,11 +1,12 @@
 <template>
   <div class="outer">
     <infinite
-      v-model="loading"
+      v-model="loadingRef"
+      :is-finished="isFinishedRef"
       @on-load="onLoad"
     >
       <waterfall
-        :list="list"
+        :list="waterfallList"
         node-key="k"
         :column="5"
       >
@@ -29,15 +30,15 @@ import infinite from '@/components/infinite/index.vue'
 import waterfall from '@/components/waterfall/index.vue'
 import { ref } from 'vue'
 
-const loading = ref(false)
+const loadingRef = ref(false)
+const isFinishedRef = ref(false)
 
 const onLoad = () => {
-  loading.value = true
-
-  list.value = JSON.parse(JSON.stringify(list.value)).concat(_list.slice(10))
+  console.log('load')
+  fetchList()
 }
 
-const _list: any[] = [
+const sourceList: any[] = [
   { src: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201903%2F11%2F20190311000407_tlxbh.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1690789125&t=f2b100313eb747d1a23a46e0cc9e6258' },
   { src: 'https://images.pexels.com/users/avatars/61083217/ugurcan-ozmen-235.jpeg' },
   { src: 'http://t14.baidu.com/it/u=606838292,318337155&fm=224&app=112&f=JPEG?w=375&h=500' },
@@ -64,16 +65,24 @@ const _list: any[] = [
   { src: 'https://img2.baidu.com/it/u=2823876420,3970126246&fm=253&fmt=auto&app=120&f=JPEG?w=1179&h=530' }
 ]
 
-const list = ref<any[]>([])
+const waterfallList = ref<any[]>([])
 
-const fetch = () => {
-  loading.value = true
-  setTimeout(() => {
-    list.value = _list.slice(0, 6)
-  }, 1000)
+const fetchList = () => {
+  if (isFinishedRef.value) return
+
+  waterfallList.value = [
+    ...waterfallList.value,
+    ...sourceList.slice(0, 10)
+  ]
+  if (!waterfallList.value.length) {
+    waterfallList.value = sourceList.slice(0, 10)
+  } else {
+    waterfallList.value = [
+      ...waterfallList.value.concat(sourceList.slice(10))
+    ]
+  }
+  loadingRef.value = false
 }
-
-fetch()
 
 </script>
 

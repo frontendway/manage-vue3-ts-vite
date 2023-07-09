@@ -6,7 +6,7 @@
       height: outerHeightRef + 'px'
     }"
   >
-    <template v-if="list.length">
+    <template v-if="list.length && isShow">
       <div
         v-for="(item, index) of list"
         :key="index"
@@ -109,6 +109,7 @@ const useItemHeights = () => {
     .then((items) => {
       items.forEach(item => {
         itemHeights.push(item.height)
+        console.log(11)
       })
       useLocation()
     })
@@ -116,6 +117,8 @@ const useItemHeights = () => {
       console.error('图片加载失败')
     })
 }
+
+const isShow = ref(false)
 
 const useLocation = () => {
   props.list.forEach((item, index) => {
@@ -125,8 +128,8 @@ const useLocation = () => {
     item._style.top = getTop()
     incrementColumnHeight(index)
     outerHeightRef.value = getMaxColumnHeight()
-    console.log(outerHeightRef.value)
   })
+  isShow.value = true
 }
 
 // 获取最小列所在的高度
@@ -157,12 +160,15 @@ const incrementColumnHeight = (index: number) => {
 }
 
 const init = () => {
-  useOuterWidth()
-  useColumnWidth()
-  useItemHeights()
+  nextTick(() => {
+    useOuterWidth()
+    useColumnWidth()
+    useItemHeights()
+  })
 }
 
 const reset = () => {
+  isShow.value = false
   outerWidthRef.value = 0
   itemHeights = []
   useColumnHeight()
@@ -171,10 +177,8 @@ const reset = () => {
 watch(
   () => props.list,
   () => {
-    nextTick(() => {
-      reset()
-      init()
-    })
+    reset()
+    init()
   },
   {
     deep: true,
@@ -185,10 +189,8 @@ watch(
 watch(
   () => props.column,
   () => {
-    nextTick(() => {
-      reset()
-      init()
-    })
+    reset()
+    init()
   }
 )
 
